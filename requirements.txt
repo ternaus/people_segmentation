@@ -1,0 +1,13 @@
+addict
+catalyst
+imagecorruptions
+joblib
+jpeg4py
+numpy
+opencv-python
+pandas
+Pillow
+scikit-image
+scikit-learn
+scipy
+torch
