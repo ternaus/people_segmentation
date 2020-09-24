@@ -43,8 +43,8 @@ jobs:
     - name: Run flake8
       run: flake8
     - name: Run Mypy
-      run: mypy people segmentation
-    - name: tests
-      run: |
-       pip install .[tests]
-       pytest
+      run: mypy people_segmentation
+#    - name: tests
+#      run: |
+#       pip install .[tests]
+#       pytest
