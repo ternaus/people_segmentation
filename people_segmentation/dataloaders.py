@@ -11,7 +11,12 @@ from torch.utils.data import Dataset
 
 
 class SegmentationDataset(Dataset):
-    def __init__(self, samples: List[Tuple[Path, Path]], transform: albu.Compose, length: int = None,) -> None:
+    def __init__(
+        self,
+        samples: List[Tuple[Path, Path]],
+        transform: albu.Compose,
+        length: int = None,
+    ) -> None:
         self.samples = samples
         self.transform = transform
 

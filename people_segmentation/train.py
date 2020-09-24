@@ -41,7 +41,8 @@ class SegmentPeople(pl.LightningModule):
             corrections: Dict[str, str] = {"model.": ""}
 
             checkpoint = load_checkpoint(
-                file_path=self.hparams["resume_from_checkpoint"], rename_in_layers=corrections,
+                file_path=self.hparams["resume_from_checkpoint"],
+                rename_in_layers=corrections,
             )
             self.model.load_state_dict(checkpoint["state_dict"])
 
@@ -113,7 +114,8 @@ class SegmentPeople(pl.LightningModule):
 
     def configure_optimizers(self):
         optimizer = object_from_dict(
-            self.hparams["optimizer"], params=filter(lambda x: x.requires_grad, self.model.parameters()),
+            self.hparams["optimizer"],
+            params=filter(lambda x: x.requires_grad, self.model.parameters()),
         )
 
         scheduler = object_from_dict(self.hparams["scheduler"], optimizer=optimizer)
