@@ -115,7 +115,7 @@ class SegmentPeople(pl.LightningModule):
     def configure_optimizers(self):
         optimizer = object_from_dict(
             self.hparams["optimizer"],
-            params=filter(lambda x: x.requires_grad, self.model.parameters()),
+            params=[x for x in self.model.parameters() if x.requires_grad],
         )
 
         scheduler = object_from_dict(self.hparams["scheduler"], optimizer=optimizer)
