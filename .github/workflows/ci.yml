@@ -44,7 +44,7 @@ jobs:
       run: flake8
     - name: Run Mypy
       run: mypy people_segmentation
-    - name: tests
-      run: |
-       pip install .[tests]
-       pytest
+#    - name: tests
+#      run: |
+#       pip install .[tests]
+#       pytest
