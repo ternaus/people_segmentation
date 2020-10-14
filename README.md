@@ -2,8 +2,16 @@
 
 ![](https://habrastorage.org/webt/bc/eg/g8/bcegg8zdgd-co-lip6hxn976jdm.jpeg)
 
-## Data
+## Installation
 
+`pip install -U people_segmentation`
+
+
+### Example inference
+
+Jupyter notebook with the example: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1ZHQ3beJP-7Pbq4I5Jsc8Co2dIkK31ALi?usp=sharing)
+
+## Data
 ### Train set:
 
 * Mapillary Vistas Commercial 1.2 (train)
@@ -53,7 +61,7 @@ Example:
 export VAL_PATH=<path to the validation folder>
 ```
 
-### Run training
+### Training
 ```
 python -m people_segmentation.train -c <path to config>
 ```
@@ -61,7 +69,7 @@ python -m people_segmentation.train -c <path to config>
 You can check the loss and validation curves for the configs from [people_segmentation/configs](people_segmentation/configs)
 at [W&B dashboard](https://wandb.ai/ternaus/people_segmentation-people_segmentation)
 
-### Run Inference
+### Inference
 
 ```bash
 python -m torch.distributed.launch --nproc_per_node=<num_gpu> people_segmentation/inference.py \
