@@ -16,6 +16,6 @@ models = {
 
 def create_model(model_name: str) -> nn.Module:
     model = models[model_name].model
-    state_dict = model_zoo.load_url(models[model_name].url, progress=True, map_location="cpu")
+    state_dict = model_zoo.load_url(models[model_name].url, progress=True, map_location="cpu")["state_dict"]
     model.load_state_dict(state_dict)
     return model
