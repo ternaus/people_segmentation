@@ -49,7 +49,7 @@ class SegmentPeople(pl.LightningModule):
             ("focal", 0.9, BinaryFocalLoss()),
         ]
 
-    def forward(self, batch: torch.Tensor) -> torch.Tensor:
+    def forward(self, batch: torch.Tensor) -> torch.Tensor:  # type: ignore
         return self.model(batch)
 
     def setup(self, stage=0):
@@ -141,10 +141,10 @@ class SegmentPeople(pl.LightningModule):
         return {"loss": total_loss, "log": logs}
 
     def _get_current_lr(self) -> torch.Tensor:
-        lr = [x["lr"] for x in self.optimizers[0].param_groups][0]
+        lr = [x["lr"] for x in self.optimizers[0].param_groups][0]  # type: ignore
         return torch.Tensor([lr])[0].cuda()
 
-    def validation_step(self, batch: Dict[str, torch.Tensor], batch_id: int, dataloader_idx: int) -> Dict[str, Any]:
+    def validation_step(self, batch, batch_id, dataloader_idx):
         features = batch["features"]
         masks = batch["masks"]
 
@@ -160,7 +160,7 @@ class SegmentPeople(pl.LightningModule):
 
         return result
 
-    def validation_epoch_end(self, outputs: List[List[Dict[str, Any]]]) -> Dict[str, Any]:
+    def validation_epoch_end(self, outputs):
         logs = {"epoch": self.trainer.current_epoch}
 
         for output_id, output in enumerate(outputs):
