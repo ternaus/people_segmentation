@@ -79,3 +79,7 @@ python -m torch.distributed.launch --nproc_per_node=<num_gpu> people_segmentatio
                                    -o <output-path> \
                                    --fp16
 ```
+
+## Web App
+https://peoplesegmentation.herokuapp.com/
+Code for the web app: https://github.com/ternaus/people_segmentation_demo
