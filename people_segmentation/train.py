@@ -9,16 +9,14 @@ import yaml
 from albumentations.core.serialization import from_dict
 from iglovikov_helper_functions.config_parsing.utils import object_from_dict
 from iglovikov_helper_functions.dl.pytorch.lightning import find_average
-
+from iglovikov_helper_functions.dl.pytorch.utils import state_dict_from_disk
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_toolbelt.losses import JaccardLoss, BinaryFocalLoss
 from torch.utils.data import DataLoader
 
 from people_segmentation.dataloaders import SegmentationDataset
-
 from people_segmentation.metrics import binary_mean_iou
-from people_segmentation.utils import get_samples, load_checkpoint
-
+from people_segmentation.utils import get_samples
 
 train_path = Path(os.environ["TRAIN_PATH"])
 val_path = Path(os.environ["VAL_PATH"])
@@ -40,11 +38,11 @@ class SegmentPeople(pl.LightningModule):
         if "resume_from_checkpoint" in self.hparams:
             corrections: Dict[str, str] = {"model.": ""}
 
-            checkpoint = load_checkpoint(
+            state_dict = state_dict_from_disk(
                 file_path=self.hparams["resume_from_checkpoint"],
                 rename_in_layers=corrections,
             )
-            self.model.load_state_dict(checkpoint["state_dict"])
+            self.model.load_state_dict(state_dict)
 
         self.losses = [
             ("jaccard", 0.1, JaccardLoss(mode="binary", from_logits=True)),
