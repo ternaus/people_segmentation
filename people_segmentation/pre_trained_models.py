@@ -14,8 +14,8 @@ models = {
 }
 
 
-def create_model(model_name: str, max_size: int, device: str = "cpu") -> nn.Module:
-    model = models[model_name].model(max_size=max_size, device=device)
+def create_model(model_name: str) -> nn.Module:
+    model = models[model_name].model
     state_dict = model_zoo.load_url(models[model_name].url, progress=True, map_location="cpu")
     model.load_state_dict(state_dict)
     return model
