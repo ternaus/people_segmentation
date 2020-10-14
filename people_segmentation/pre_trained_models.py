@@ -1,6 +1,7 @@
 from collections import namedtuple
 from torch import nn
 from torch.utils import model_zoo
+from iglovikov_helper_functions.dl.pytorch.utils import rename_layers
 
 from segmentation_models_pytorch import Unet
 
@@ -17,5 +18,6 @@ models = {
 def create_model(model_name: str) -> nn.Module:
     model = models[model_name].model
     state_dict = model_zoo.load_url(models[model_name].url, progress=True, map_location="cpu")["state_dict"]
+    state_dict = rename_layers(state_dict, {"model.": ""})
     model.load_state_dict(state_dict)
     return model
