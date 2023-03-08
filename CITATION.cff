@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Vladimir
+    given-names: Iglovikov
+    orcid: https://orcid.org/0000-0003-2946-5525
+title: "My Research Software"
+version: 0.0.4
+doi: 10.5281/zenodo.7708627
+date-released: 2020-10-14
